@@ -12,7 +12,7 @@ public class StudentReopositoryImpl implements StudentRepository {
 	public static final String ADD_STUDENT = "  insert into students (name, age, email) values(? , ?, ?) ";
 	public static final String VIEW_STUDENT = " select * from students ";
 	public static final String DELETE_STUDENT = " delete from students ";
-	public static final String EDIT_STUDENT = " update students set ? = ? where ? = ? ";
+	public static final String EDIT_STUDENT = " update students set name = ? where name = ? ";
 
 	@Override
 	public int addStudent(String name, int age, String email) throws SQLException {
@@ -62,10 +62,30 @@ public class StudentReopositoryImpl implements StudentRepository {
 
 	@Override
 	public StudentDTO deleteStudent() throws SQLException {
-		
-		
+
+		try (Connection conn = DBConnection.getconnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(DELETE_STUDENT);
+			pstmt.executeUpdate();
+			System.out.println("데이터가 모두 삭제되었습니다");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return null;
+	}
+
+	public void updateStudent(String name) throws SQLException {
+
+		try (Connection conn = DBConnection.getconnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(EDIT_STUDENT);
+			pstmt.setString(3, name);
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

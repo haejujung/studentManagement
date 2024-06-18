@@ -31,14 +31,19 @@ public class StudentTest {
 					System.out.println("추가할 학생 dlapdlf을 입력하세요");
 					String email = scanner.nextLine();
 					impl.addStudent(name, age, email);
+					
 				} else if (choice == 2) {
 					impl.viewStuent();
 					
 				} else if (choice == 3) {
 					impl.deleteStudent();
 				} else if (choice == 4) {
-					System.out.println("프로그램을 종료 합니다");
-					break;
+					scanner.nextLine();
+					System.out.println("수정할 학생 이름을 입력하세요");
+					String name = scanner.nextLine();
+					
+					
+					
 				} else {
 					System.out.println("잘못된 선택입니다. 다시 시도하세요.");
 				}
